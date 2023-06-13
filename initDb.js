@@ -17,7 +17,7 @@
  */
 
 const { connectToDb, getDbReference, closeDbConnection } = require('./lib/mongo')
-const { bulkInsertNewBusinesses } = require('./models/business')
+// const { bulkInsertNewBusinesses } = require('./models/business')
 
 const businessData = require('./data/businesses.json')
 
