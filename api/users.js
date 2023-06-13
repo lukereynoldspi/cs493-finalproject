@@ -1,59 +1,59 @@
+const express = require('express');
+const jwtMiddleware = require('../jwtMiddleware');
+const router = express.Router();
+const userSchema = require('../models/user');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const { JWT_SECRET } = require('../config');
+exports.router = router;
 
-const { Router } = require('express')
-
-const { validateAgainstSchema } = require('../lib/validation')
-const {
-  UserSchema,
-  insertNewUser,
-  getUserById
-} = require('../models/user')
-
-const router = Router()
-
-/*
- * POST /users - Route to create a new user.
- */
-router.post('/', async (req, res) => {
-  if (validateAgainstSchema(req.body, UserSchema)) {
-    try {
-      const id = await insertNewUser(req.body)
-      res.status(201).send({
-        id: id,
-        links: {
-          user: `/users/${id}`,
-          course: `/courses/${req.body.courseId}`
-        }
-      })
-    } catch (err) {
-      console.error(err)
-      res.status(500).send({
-        error: "Error inserting user into DB.  Please try again later."
-      })
-    }
-  } else {
-    res.status(400).send({
-      error: "Request body is not a valid user object"
-    })
+router.post('/', (req, res) => {
+  if (req.userSchema.role !== 'admin') {
+    return res.status(403).json({ message: 'Forbidden' });
   }
-})
+  const userData = req.body;
+  const newUser = new userSchema(userData);
+  newUser.save().then(() => {
+    res.status(201).json({ id: newUser.userid});
+  }).catch(err => {
+    console.error(err);
+    res.status(500).json({
+      error: 'Error creating user'
+    });
+  });
+});
 
-/*
- * GET /users/{id} - Route to fetch info about a specific user.
- */
-router.get('/:id', async (req, res, next) => {
-  try {
-    const user = await getUserById(req.params.id)
-    if (user) {
-      res.status(200).send(user)
-    } else {
-      next()
+router.post('/login', jwtMiddleware, async (req, res) => {
+  const { email, password } = req.body;
+  try{
+    const user = await userSchema.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid password' });
     }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+    const token = jwt.sign(user, JWT_SECRET, { expiresIn: JWT_EXPIRATION_TIME });
+    res.status(200).json({ token });
   } catch (err) {
-    console.error(err)
-    res.status(500).send({
-      error: "Unable to fetch user.  Please try again later."
-    })
+    console.error(err);
+    res.status(500).json({ error: 'Error logging in' });
   }
-})
+});
 
-module.exports = router
+router.get('/:userId', jwtMiddleware, async (req, res) => {
+  try {
+    const user = await userSchema.findOne({ userid: req.params.userId });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    if (req.userSchema.role !== 'admin' && req.userSchema.userid !== user.userid) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error getting user' });
+  }
+});
