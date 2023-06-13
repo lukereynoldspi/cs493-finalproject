@@ -11,7 +11,11 @@ const { extractValidFields } = require('../lib/validation')
  * Schema describing required/optional fields of a course object.
  */
 const CourseSchema = {
-  subjectCode: { required: true },
+  subject: { required: true },
+  number: { required: true },
+  title: { required: true },
+  term: { required: true },
+  instructorId: { required: true },
   enrolledStudents: { required: true },
   assignments: { required: true }
 }

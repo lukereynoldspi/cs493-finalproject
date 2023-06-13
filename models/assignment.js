@@ -11,8 +11,10 @@ const { extractValidFields } = require('../lib/validation')
  * Schema describing required/optional fields of a assignment object.
  */
 const AssignmentSchema = {
+  courseId: { required: true },
   title: { required: true },
-  dueDate: { required: true },
+  points: { required: true },
+  due: { required: true },
   studentSubmissions: { required: true }
 }
 exports.AssignmentSchema = AssignmentSchema
