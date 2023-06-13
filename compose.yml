@@ -1,36 +1,17 @@
 services:
-  db:
+  app:
+    build: .
+    ports: 
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.cw6yjly.mongodb.net/${MONGO_DB_NAME}
+    depends_on:
+      - mongo
+  mongo:
     image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
-
-  db-init:
-    build: .
-    environment:
-      MONGO_HOST: db
-      MONGO_USER: ${MONGO_ROOT_USER}
-      MONGO_PASSWORD: ${MONGO_ROOT_PASSWORD}
-      MONGO_DB_NAME: ${MONGO_DB_NAME}
-      MONGO_AUTH_DB_NAME: admin
-      MONGO_CREATE_USER: ${MONGO_USER}
-      MONGO_CREATE_PASSWORD: ${MONGO_PASSWORD}
-    depends_on:
-      - db
-    restart: on-failure
-    command: npm run initdb
-
-  api:
-    build: .
     ports:
-      - 8000:8000
+      - "27017:27017"
     environment:
-      MONGO_HOST: db
-      MONGO_USER: ${MONGO_USER}
-      MONGO_PASSWORD: ${MONGO_PASSWORD}
-      MONGO_DB_NAME: ${MONGO_DB_NAME}
-    depends_on:
-      - db
-      - db-init
-    restart: on-failure
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_DB_NAME=${MONGO_DB_NAME}
