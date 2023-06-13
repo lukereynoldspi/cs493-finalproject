@@ -1,62 +1,103 @@
-// /*
-//  * API sub-router for businesses collection endpoints.
-//  */
+const express = require('express');
+const router = express.Router();
+const AssignmentSchema = require('../models/assignment');
+const submissionSchema = require('../models/submission');
+const jwtMiddleware = require('../jwtMiddleware');
+exports.router = router;
 
-// const { Router } = require('express')
+router.get('/', jwtMiddleware, async (req, res) => {
+  try {
+    const assignments = await AssignmentSchema.find();
+    res.status(200).json(assignments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error getting assignments' });
+  }
+});
 
-// const { validateAgainstSchema } = require('../lib/validation')
-// const {
-//   AssignmentSchema,
-//   insertNewAssignment,
-//   getAssignmentById
-// } = require('../models/assignment')
+router.get('/:assignmentId', jwtMiddleware, async (req, res) => {
+  const assignmentId = req.params.assignmentId;
+  try {
+    const assignment = await AssignmentSchema.findById( req.params.assignmentId );
+    res.status(200).json(assignment);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error getting assignment' });
+  }
+});
 
-// const router = Router()
+router.post('/', jwtMiddleware, async (req, res) => {
+  if (req.user.role !== 'admin' || req.user.role !== 'instructor') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+  const assignmentData = req.body;
+  const newAssignment = new AssignmentSchema(assignmentData);
+  newAssignment.save().then(() => {
+    res.status(201).json({ id: newAssignment.assignmentId });
+  }).catch(err => {
+    console.error(err);
+    res.status(500).json({
+      error: 'Error creating assignment'
+    });
+  });
+});
 
-// /*
-//  * POST /assignments - Route to create a new assignment.
-//  */
-// router.post('/', async (req, res) => {
-//   if (validateAgainstSchema(req.body, AssignmentSchema)) {
-//     try {
-//       const id = await insertNewAssignment(req.body)
-//       res.status(201).send({
-//         id: id,
-//         links: {
-//           assignment: `/assignments/${id}`,
-//           course: `/courses/${req.body.courseId}`
-//         }
-//       })
-//     } catch (err) {
-//       console.error(err)
-//       res.status(500).send({
-//         error: "Error inserting assignment into DB.  Please try again later."
-//       })
-//     }
-//   } else {
-//     res.status(400).send({
-//       error: "Request body is not a valid assignment object"
-//     })
-//   }
-// })
+router.patch('/:assignmentId', jwtMiddleware, async (req, res) => {
+  try {
+    const assignment = await AssignmentSchema.findById(req.params.assignmentId);
+    if (!assignment) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+    assignment.set(req.body);
+    await assignment.save();
+    res.status(200).json(assignment);
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error updating assignment' });
+  }
+});
 
-// /*
-//  * GET /assignments/{id} - Route to fetch info about a specific assignment.
-//  */
-// router.get('/:id', async (req, res, next) => {
-//   try {
-//     const assignment = await getAssignmentById(req.params.id)
-//     if (assignment) {
-//       res.status(200).send(assignment)
-//     } else {
-//       next()
-//     }
-//   } catch (err) {
-//     console.error(err)
-//     res.status(500).send({
-//       error: "Unable to fetch assignment.  Please try again later."
-//     })
-//   }
-// })
+router.delete('/:assignmentId', jwtMiddleware, async (req, res) => {
+  try {
+    const assignment = await AssignmentSchema.findById(req.params.assignmentId);
+    if (!assignment) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+    await assignment.remove();
+    res.status(200).json({ message: 'Assignment deleted' });
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error deleting assignment' });
+  }
+});
 
-// module.exports = router
+router.get('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
+  try {
+    const submissions = await submissionSchema.find({ assignmentId: req.params.assignmentId });
+    res.status(200).json(submissions);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error getting submissions' });
+  }
+});
+
+router.post('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
+  try {
+    const submissionData = req.body;
+    const newSubmission = new submissionSchema(submissionData);
+    newSubmission.save().then(() => {
+      res.status(201).json({ id: newSubmission.studentId });
+    }).catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'Error creating submission'
+      });
+    });
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error creating submission' });
+  }
+});
