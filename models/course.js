@@ -7,7 +7,9 @@ const CourseSchema = new mongoose.Schema({
   term: { type: String, required: true },
   instructorId: { type: Number, required: true },
   enrolledStudents: { type: Number, required: true },
-  assignments: { type: Array, required: true }
+  assignments: { type: Array, required: true },
+  page: { type: String, required: true },
+  courseid: { type: Number, required: true }
 });
 const Course = mongoose.model('Course', CourseSchema);
 module.exports = Course;
