@@ -1,0 +1,144 @@
+[
+    {
+        "subject": "Music",
+        "number": 11,
+        "title": "Science",
+        "term": "Summer",
+        "instructorId": 13,
+        "enrolledStudents": 49,
+        "assignments": [
+            {},
+            {}
+        ],
+        "page": 1,
+        "courseId": 24
+    },
+    {
+        "subject": "Sci",
+        "number": 57,
+        "title": "Social Studies",
+        "term": "Fall",
+        "instructorId": 90,
+        "enrolledStudents": 50,
+        "assignments": [
+            {},
+            {},
+            {}
+        ],
+        "page": 2,
+        "courseId": 43
+    },
+    {
+        "subject": "Tech",
+        "number": 35,
+        "title": "Art",
+        "term": "Spring",
+        "instructorId": 5,
+        "enrolledStudents": 44,
+        "assignments": [
+            {},
+            {},
+            {},
+            {}
+        ],
+        "page": 3,
+        "courseId": 28
+    },
+    {
+        "subject": "Lang",
+        "number": 23,
+        "title": "Foreign Language",
+        "term": "Summer",
+        "instructorId": 49,
+        "enrolledStudents": 73,
+        "assignments": [
+            {},
+            {},
+            {},
+            {}
+        ],
+        "page": 4,
+        "courseId": 52
+    },
+    {
+        "subject": "Sci",
+        "number": 42,
+        "title": "Music",
+        "term": "Winter",
+        "instructorId": 51,
+        "enrolledStudents": 83,
+        "assignments": [
+            {},
+            {},
+            {},
+            {}
+        ],
+        "page": 5,
+        "courseId": 62
+    },
+    {
+        "subject": "PE",
+        "number": 40,
+        "title": "Social Studies",
+        "term": "Winter",
+        "instructorId": 48,
+        "enrolledStudents": 25,
+        "assignments": [
+            {},
+            {},
+            {}
+        ],
+        "page": 6,
+        "courseId": 50
+    },
+    {
+        "subject": "Math",
+        "number": 36,
+        "title": "Music",
+        "term": "Fall",
+        "instructorId": 41,
+        "enrolledStudents": 6,
+        "assignments": [],
+        "page": 7,
+        "courseId": 71
+    },
+    {
+        "subject": "Sci",
+        "number": 86,
+        "title": "English",
+        "term": "Fall",
+        "instructorId": 25,
+        "enrolledStudents": 40,
+        "assignments": [],
+        "page": 8,
+        "courseId": 31
+    },
+    {
+        "subject": "Art",
+        "number": 81,
+        "title": "History",
+        "term": "Summer",
+        "instructorId": 50,
+        "enrolledStudents": 24,
+        "assignments": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "page": 9,
+        "courseId": 56
+    },
+    {
+        "subject": "Math",
+        "number": 68,
+        "title": "Science",
+        "term": "Summer",
+        "instructorId": 66,
+        "enrolledStudents": 93,
+        "assignments": [],
+        "page": 10,
+        "courseId": 63
+    }
+]
