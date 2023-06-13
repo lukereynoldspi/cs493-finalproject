@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const CourseSchema = require('../models/course');
 const jwtMiddleware = require('../jwtMiddleware');
-
+exports.router = router;
 router.get('/', jwtMiddleware, async (req, res) => {
   try {
     const courses = await CourseSchema.find();
