@@ -6,7 +6,7 @@ const CourseSchema = new mongoose.Schema({
   title: { type: String, required: true },
   term: { type: String, required: true },
   instructorId: { type: Number, required: true },
-  enrolledStudents: { type: Number, required: true },
+  enrolledStudents: { type: Array, required: true },
   assignments: { type: Array, required: true },
   page: { type: String, required: true },
   courseId: { type: Number, required: true }
