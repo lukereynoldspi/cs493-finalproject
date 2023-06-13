@@ -4,7 +4,6 @@ const router = express.Router();
 const userSchema = require('../models/user');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { JWT_SECRET } = require('../config');
 exports.router = router;
 
 router.post('/', (req, res) => {
