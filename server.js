@@ -9,8 +9,8 @@ const dbOptions ={
   useUnifiedTopology: true
 };
 const port = 8000
-const dbURL = 'mongodb+srv://lucasrouchy1:guest@cluster0.cw6yjly.mongodb.net/Tarpaulin';
-// const dbURL = 'mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.cw6yjly.mongodb.net/${process.env.MONGO_DB_NAME}';
+
+const dbURL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.cw6yjly.mongodb.net/${process.env.MONGO_DB_NAME}`;
 mongoose.connect(dbURL, dbOptions).then(() => {
   console.log('Connected to MongoDB Tarpaulin database');
 }).catch(err => {

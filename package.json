@@ -1,7 +1,7 @@
 {
-  "name": "template-assignment-4",
+  "name": "tarpaulin-open-api",
   "version": "1.2.0",
-  "description": "A small business review API",
+  "description": "An alternative to the Canvas API for OSU CS 493",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,18 +13,16 @@
     "type": "git",
     "url": "git+https://github.com/osu-cs493-sp22/template-assignment-4.git"
   },
-  "author": "Hess <hessro@oregonstate.edu>",
+  "authors": "Lucas Rouchy, Luke Reynolds",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/osu-cs493-sp22/template-assignment-4/issues"
-  },
-  "homepage": "https://github.com/osu-cs493-sp22/template-assignment-4#readme",
   "dependencies": {
     "express": "^4.18.1",
     "mongodb": "^4.6.0",
     "morgan": "^1.10.0",
     "dotenv": "^16.0.0",
-    "mongoose": "^6.0.12"
+    "mongoose": "^6.0.12",
+    "crypto": "^1.0.1",
+    "jsonwebtoken": "9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
