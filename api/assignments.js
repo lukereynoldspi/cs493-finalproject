@@ -3,9 +3,16 @@ const router = express.Router();
 const AssignmentSchema = require('../models/assignment');
 const submissionSchema = require('../models/submission');
 const jwtMiddleware = require('../jwtMiddleware');
+const rateLimit = require('express-rate-limit');
 exports.router = router;
 
-router.get('/', jwtMiddleware, async (req, res) => {
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // 10 requests per minute
+  message: 'Too many requests from thi IP, please try again in a minute'
+});
+
+router.get('/',limiter, jwtMiddleware, async (req, res) => {
   try {
     const assignments = await AssignmentSchema.find();
     res.status(200).json(assignments);
@@ -15,7 +22,7 @@ router.get('/', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:assignmentId', jwtMiddleware, async (req, res) => {
+router.get('/:assignmentId', limiter, jwtMiddleware, async (req, res) => {
   const assignmentId = req.params.assignmentId;
   try {
     const assignment = await AssignmentSchema.findById( req.params.assignmentId );
@@ -26,7 +33,7 @@ router.get('/:assignmentId', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.post('/', jwtMiddleware, async (req, res) => {
+router.post('/', limiter, jwtMiddleware, async (req, res) => {
   if (req.user.role !== 'admin' || req.user.role !== 'instructor') {
     return res.status(403).json({ message: 'Forbidden' });
   }
@@ -42,7 +49,7 @@ router.post('/', jwtMiddleware, async (req, res) => {
   });
 });
 
-router.patch('/:assignmentId', jwtMiddleware, async (req, res) => {
+router.patch('/:assignmentId', limiter, jwtMiddleware, async (req, res) => {
   try {
     const assignment = await AssignmentSchema.findById(req.params.assignmentId);
     if (!assignment) {
@@ -58,7 +65,7 @@ router.patch('/:assignmentId', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.delete('/:assignmentId', jwtMiddleware, async (req, res) => {
+router.delete('/:assignmentId', limiter, jwtMiddleware, async (req, res) => {
   try {
     const assignment = await AssignmentSchema.findById(req.params.assignmentId);
     if (!assignment) {
@@ -73,7 +80,7 @@ router.delete('/:assignmentId', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
+router.get('/:assignmentId/submissions', limiter, jwtMiddleware, async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const options = {
     skip: (page - 1) * limit,
@@ -88,7 +95,7 @@ router.get('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.post('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
+router.post('/:assignmentId/submissions', limiter, jwtMiddleware, async (req, res) => {
   try {
     const assignmentID = req.params.assignmentId;
     const studentID = req.user.id;
@@ -124,7 +131,7 @@ router.post('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:assignmentId/submissions/:submissionId', jwtMiddleware, async (req, res) => {
+router.get('/:assignmentId/submissions/:submissionId', limiter, jwtMiddleware, async (req, res) => {
   try {
     const submission = await submissionSchema.findById(req.params.submissionId);
     if (!submission) {

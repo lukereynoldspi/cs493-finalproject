@@ -4,9 +4,17 @@ const router = express.Router();
 const userSchema = require('../models/user');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const rateLimit = require('express-rate-limit');
+
 exports.router = router;
 
-router.post('/', (req, res) => {
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // 10 requests per minute
+  message: 'Too many requests from this IP, please try again in a minute'
+});
+
+router.post('/', limiter, (req, res) => {
   if (req.userSchema.role !== 'admin') {
     return res.status(403).json({ message: 'Forbidden' });
   }
@@ -22,7 +30,7 @@ router.post('/', (req, res) => {
   });
 });
 
-router.post('/login', jwtMiddleware, async (req, res) => {
+router.post('/login', limiter, jwtMiddleware, async (req, res) => {
   const { email, password } = req.body;
   try{
     const user = await userSchema.findOne({ email });
@@ -41,7 +49,7 @@ router.post('/login', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:userId', jwtMiddleware, async (req, res) => {
+router.get('/:userId', limiter, jwtMiddleware, async (req, res) => {
   try {
     const user = await userSchema.findOne({ userid: req.params.userId });
     if (!user) {
