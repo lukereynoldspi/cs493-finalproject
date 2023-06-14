@@ -74,8 +74,13 @@ router.delete('/:assignmentId', jwtMiddleware, async (req, res) => {
 });
 
 router.get('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const options = {
+    skip: (page - 1) * limit,
+    limit: parseInt(limit)
+  };
   try {
-    const submissions = await submissionSchema.find({ assignmentId: req.params.assignmentId });
+    const submissions = await submissionSchema.find({ assignmentId: req.params.assignmentId }, null, options);
     res.status(200).json(submissions);
   } catch (err) {
     console.error(err);

@@ -13,7 +13,7 @@ router.get('/', jwtMiddleware, async (req, res) => {
     limit: parseInt(limit)
   };
   try {
-    const courses = await CourseSchema.find({},'enrolledStudents -assignments');
+    const courses = await CourseSchema.find({},'enrolledStudents -assignments', options);
     res.status(200).json(courses);
   } catch (err) {
     console.error(err);
