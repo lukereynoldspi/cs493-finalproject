@@ -30,7 +30,7 @@ router.post('/', limiter, (req, res) => {
   });
 });
 
-router.post('/login', limiter, jwtMiddleware, async (req, res) => {
+router.post('/login', limiter, async (req, res) => {
   const { email, password } = req.body;
   try{
     const user = await userSchema.findOne({ email });
