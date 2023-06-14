@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const CourseSchema = require('../models/course');
+const userSchema = require('../models/user');
 const jwtMiddleware = require('../jwtMiddleware');
+const csv = require('csv-parser');
+const fs = require('fs');
 exports.router = router;
 router.get('/', jwtMiddleware, async (req, res) => {
   try {
@@ -112,5 +115,37 @@ router.post('/:courseId/students', jwtMiddleware, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error adding student' });
+  }
+});
+
+router.get('/:courseId/roster', jwtMiddleware, async (req, res) => {
+  try {
+    const courseID = req.params.courseId;
+    const course = await CourseSchema.findById(courseID);
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+    if (req.user.role !== 'admin' && req.user.role !== 'instructor') {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    const students = course.enrolledStudents;
+    const filename = `course_${courseID}_roster.csv`;
+    const filepath = `./rosters/${filename}`;
+    const writestream = fs.createWriteStream(filepath);
+    writestream.write('"Student ID", "Name", "Email"\n');
+    for (const studentID of students) {
+      const student = await userSchema.findById(studentID);
+      writestream.write(`"${studentID}", "${student.name}", "${student.email}"\n`);
+    }
+    writestream.end();
+    writestream.on('finish', () => {
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+      const filestream = fs.createReadStream(filepath);
+      filestream.pipe(res);
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error getting roster' });
   }
 });
