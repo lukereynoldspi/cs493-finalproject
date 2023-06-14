@@ -35,7 +35,7 @@ router.post('/login', limiter, async (req, res) => {
   try{
     const user = await userSchema.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid password' });
+      return res.status(401).json({ message: 'Invalid email' });
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
