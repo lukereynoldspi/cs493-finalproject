@@ -23,7 +23,8 @@
     "mongoose": "^6.0.12",
     "crypto": "^1.0.1",
     "jsonwebtoken": "9.0.0",
-    "bcrypt": "^5.0.1"
+    "bcrypt": "^5.0.1",
+    "fs": "^0.0.1-security"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
