@@ -3,12 +3,17 @@ const router = express.Router();
 const CourseSchema = require('../models/course');
 const userSchema = require('../models/user');
 const jwtMiddleware = require('../jwtMiddleware');
-const csv = require('csv-parser');
+// const csv = require('csv-parser');
 const fs = require('fs');
 exports.router = router;
 router.get('/', jwtMiddleware, async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const options = {
+    skip: (page - 1) * limit,
+    limit: parseInt(limit)
+  };
   try {
-    const courses = await CourseSchema.find();
+    const courses = await CourseSchema.find({},'enrolledStudents -assignments');
     res.status(200).json(courses);
   } catch (err) {
     console.error(err);
@@ -19,7 +24,7 @@ router.get('/', jwtMiddleware, async (req, res) => {
 router.get('/:courseId', jwtMiddleware, async (req, res) => {
   const courseId = req.params.courseId;
   try {
-    const course = await CourseSchema.findById( req.params.courseId );
+    const course = await CourseSchema.findById( courseId, 'enrolledStudents -assignments');
     res.status(200).json(course);
   } catch (err) {
     console.error(err);
