@@ -98,18 +98,39 @@ router.post('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
       file,
       timestamp: new Date()
     });
-    const savedSubmission = await submission.save();
-    const submissionURL = `http://localhost:8000/submissions/${savedSubmission.id}/download`;
-    res.status(201).json({
-      id: savedSubmission.id,
-      studentID: savedSubmission.studentID,
-      assignmentID: savedSubmission.assignmentID,
-      timestamp: savedSubmission.timestamp,
-      file: submissionURL
-    });
-  }
-  catch (err) {
+    submission.save().then(() => {
+      const submissionURL = `http://localhost:8000/submissions/${submission.id}/download`;
+      res.status(201).json({
+        id: savedSubmission.id,
+        studentID: savedSubmission.studentID,
+        assignmentID: savedSubmission.assignmentID,
+        timestamp: savedSubmission.timestamp,
+        file: submissionURL
+      });
+  }).catch(err => {
     console.error(err);
-    res.status(500).json({ error: 'Error creating submission' });
+    res.status(500).json({
+      error: 'Error creating submission'
+    });
+  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error creating submissions' });
   }
 });
+
+router.get('/:assignmentId/submissions/:submissionId', jwtMiddleware, async (req, res) => {
+  try {
+    const submission = await submissionSchema.findById(req.params.submissionId);
+    if (!submission) {
+      return res.status(404).json({ message: 'Submission not found' });
+    }
+    const filepath = submission.file;
+    res.download(filepath);
+    res.status(200).json(submission);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error getting submission' });
+  }
+});
+  
