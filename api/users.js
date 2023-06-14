@@ -47,10 +47,26 @@ router.get('/:userId', jwtMiddleware, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    if (req.userSchema.role !== 'admin' && req.userSchema.userid !== user.userid) {
+    if (req.userSchema.role !== 'admin' && req.userSchema.userid !== user.userId) {
       return res.status(403).json({ message: 'Forbidden' });
     }
-    res.status(200).json(user);
+    let classes = [];
+    if (user.role === 'student') {
+      classes = await userSchema.aggregate([
+        { $match: { userid: user.userid } },
+        { $lookup: { from: 'courses', localField: 'userId', foreignField: 'instructor', as: 'teachingClasses'}},
+        { $project: { _id: 0, teachingClasses: 1 } }
+      ]);
+    }
+    const userData = {
+      id: user.userid,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      classes
+    };
+
+    res.status(200).json(userData);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error getting user' });
