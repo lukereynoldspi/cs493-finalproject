@@ -8,6 +8,6 @@ const jwtSecret = generateRandomString(32);
 
 module.exports = {
     JWT_SECRET: jwtSecret,
-    JWT_EXPIRATION_TIME: '24h'
+    JWT_EXPIRATION_TIME: {expiresIn: '24h' }
 };
   

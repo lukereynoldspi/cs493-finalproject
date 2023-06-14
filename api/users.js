@@ -5,6 +5,8 @@ const userSchema = require('../models/user');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const rateLimit = require('express-rate-limit');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET, JWT_EXPIRATION_TIME } = require('../config');
 
 exports.router = router;
 
@@ -14,8 +16,8 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in a minute'
 });
 
-router.post('/', limiter, (req, res) => {
-  if (req.userSchema.role !== 'admin') {
+router.post('/', limiter, jwtMiddleware, (req, res) => {
+  if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Forbidden' });
   }
   const userData = req.body;
@@ -41,7 +43,8 @@ router.post('/login', limiter, async (req, res) => {
     if (!pwd) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-    res.status(200).json("Logged in");
+    const token = jwt.sign({ email: userSchema.email, role: userSchema.role}, JWT_SECRET, JWT_EXPIRATION_TIME);
+    res.status(200).json({ token: token, message: "Logged in"});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error logging in' });
