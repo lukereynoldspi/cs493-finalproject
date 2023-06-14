@@ -85,15 +85,27 @@ router.get('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
 
 router.post('/:assignmentId/submissions', jwtMiddleware, async (req, res) => {
   try {
-    const submissionData = req.body;
-    const newSubmission = new submissionSchema(submissionData);
-    newSubmission.save().then(() => {
-      res.status(201).json({ id: newSubmission.studentId });
-    }).catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'Error creating submission'
-      });
+    const assignmentID = req.params.assignmentId;
+    const studentID = req.user.id;
+    const {file} = req.body;
+    const assignment = await AssignmentSchema.findById(assignmentID);
+    if (!assignment) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+    const submission = new submissionSchema({
+      assignmnetID,
+      studentID,
+      file,
+      timestamp: new Date()
+    });
+    const savedSubmission = await submission.save();
+    const submissionURL = `http://localhost:8000/submissions/${savedSubmission.id}/download`;
+    res.status(201).json({
+      id: savedSubmission.id,
+      studentID: savedSubmission.studentID,
+      assignmentID: savedSubmission.assignmentID,
+      timestamp: savedSubmission.timestamp,
+      file: submissionURL
     });
   }
   catch (err) {
