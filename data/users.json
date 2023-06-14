@@ -1,0 +1,352 @@
+[
+    {
+        "name": "Olivia",
+        "userId": 33,
+        "email": "dumbert0@pcworld.com",
+        "password": "jZ5`e$Wb3B!jv",
+        "role": "student"
+    },
+    {
+        "name": "David",
+        "userId": 35,
+        "email": "eodooley1@netscape.com",
+        "password": "kQ3@L`?Y1xF",
+        "role": "instructor"
+    },
+    {
+        "name": "John",
+        "userId": 60,
+        "email": "webbings2@sohu.com",
+        "password": "oD8'Q_psc",
+        "role": "instructor"
+    },
+    {
+        "name": "John",
+        "userId": 85,
+        "email": "lbaugham3@tamu.edu",
+        "password": "yT9}GEIrWVQ@",
+        "role": "admin"
+    },
+    {
+        "name": "Daniel",
+        "userId": 8,
+        "email": "ndunning4@yellowpages.com",
+        "password": "oM6|,0EOI.t}>}y",
+        "role": "instructor"
+    },
+    {
+        "name": "Olivia",
+        "userId": 13,
+        "email": "bclare5@ocn.ne.jp",
+        "password": "cS3#PWEeK!72LB'>",
+        "role": "student"
+    },
+    {
+        "name": "David",
+        "userId": 51,
+        "email": "mcours6@yandex.ru",
+        "password": "kU7*g{Cd!",
+        "role": "admin"
+    },
+    {
+        "name": "Emily",
+        "userId": 5,
+        "email": "abaal7@census.gov",
+        "password": "oH1$oi}mS>K",
+        "role": "admin"
+    },
+    {
+        "name": "Michael",
+        "userId": 32,
+        "email": "ethorns8@ca.gov",
+        "password": "wQ1)$}K\"h\\O3",
+        "role": "admin"
+    },
+    {
+        "name": "Sarah",
+        "userId": 91,
+        "email": "bharbison9@fda.gov",
+        "password": "fJ5|jLeS@=4`/Lco",
+        "role": "admin"
+    },
+    {
+        "name": "David",
+        "userId": 37,
+        "email": "fgersona@ifeng.com",
+        "password": "dD1*My9vs,bI",
+        "role": "instructor"
+    },
+    {
+        "name": "Jacob",
+        "userId": 76,
+        "email": "ghowiesonb@domainmarket.com",
+        "password": "qU7/\"fS.l`(QlOP",
+        "role": "admin"
+    },
+    {
+        "name": "Olivia",
+        "userId": 11,
+        "email": "asyfaxc@jimdo.com",
+        "password": "qZ3,|ITDQbma.<",
+        "role": "instructor"
+    },
+    {
+        "name": "Michael",
+        "userId": 46,
+        "email": "pnewbiggingd@surveymonkey.com",
+        "password": "yB1&U!m$3.L",
+        "role": "student"
+    },
+    {
+        "name": "Olivia",
+        "userId": 27,
+        "email": "orosenblade@sakura.ne.jp",
+        "password": "lW3&2cd8rQO\"kt",
+        "role": "admin"
+    },
+    {
+        "name": "Daniel",
+        "userId": 32,
+        "email": "grobsonf@ftc.gov",
+        "password": "mQ4<++V.#$M",
+        "role": "instructor"
+    },
+    {
+        "name": "Jessica",
+        "userId": 90,
+        "email": "imaddamsg@last.fm",
+        "password": "cO2{Vmm~fc",
+        "role": "admin"
+    },
+    {
+        "name": "Ava",
+        "userId": 47,
+        "email": "cwarnockh@marketwatch.com",
+        "password": "lM4&ZP4L\\U}$)Y4",
+        "role": "admin"
+    },
+    {
+        "name": "Ava",
+        "userId": 24,
+        "email": "jkleeweini@elegantthemes.com",
+        "password": "mQ6`Xo>o\")iL9l",
+        "role": "instructor"
+    },
+    {
+        "name": "Olivia",
+        "userId": 11,
+        "email": "fdumbarej@behance.net",
+        "password": "kP9<ciQEB",
+        "role": "student"
+    },
+    {
+        "name": "John",
+        "userId": 45,
+        "email": "tcalderak@nationalgeographic.com",
+        "password": "tQ0,G$1b7",
+        "role": "instructor"
+    },
+    {
+        "name": "Sarah",
+        "userId": 71,
+        "email": "vnottraml@skype.com",
+        "password": "xK7%0op+>9og22@",
+        "role": "student"
+    },
+    {
+        "name": "Olivia",
+        "userId": 19,
+        "email": "smehmetm@sbwire.com",
+        "password": "lB8=a($3ohB5V",
+        "role": "admin"
+    },
+    {
+        "name": "Daniel",
+        "userId": 25,
+        "email": "ngroobyn@google.it",
+        "password": "eT7)`kJmf+fNN!5",
+        "role": "admin"
+    },
+    {
+        "name": "Jessica",
+        "userId": 90,
+        "email": "bcarabineo@indiatimes.com",
+        "password": "uS9$9wM74v/d2+Ss",
+        "role": "instructor"
+    },
+    {
+        "name": "David",
+        "userId": 85,
+        "email": "ksaylorp@slideshare.net",
+        "password": "dK6'up(t$*b",
+        "role": "admin"
+    },
+    {
+        "name": "John",
+        "userId": 27,
+        "email": "snaisbetq@wikipedia.org",
+        "password": "mH7/d&r5)E",
+        "role": "instructor"
+    },
+    {
+        "name": "Sarah",
+        "userId": 10,
+        "email": "llovedayr@forbes.com",
+        "password": "fN4.0v`r",
+        "role": "instructor"
+    },
+    {
+        "name": "Daniel",
+        "userId": 31,
+        "email": "cmaccallions@wiley.com",
+        "password": "nF7`=p+Zh`*1!",
+        "role": "student"
+    },
+    {
+        "name": "Sarah",
+        "userId": 7,
+        "email": "wmcconvillet@storify.com",
+        "password": "mA9@w\\P8*g",
+        "role": "instructor"
+    },
+    {
+        "name": "David",
+        "userId": 85,
+        "email": "wpipesu@google.ca",
+        "password": "lJ6(=?h}NkgH",
+        "role": "student"
+    },
+    {
+        "name": "Jacob",
+        "userId": 61,
+        "email": "ffahrenbacherv@google.co.jp",
+        "password": "rH8>R1`r5t",
+        "role": "admin"
+    },
+    {
+        "name": "Jacob",
+        "userId": 67,
+        "email": "zcuerw@smugmug.com",
+        "password": "nY1/U\\b{_)%(t",
+        "role": "student"
+    },
+    {
+        "name": "John",
+        "userId": 39,
+        "email": "eosesnanex@ucoz.ru",
+        "password": "eM2#S1W\"E`Ug`",
+        "role": "student"
+    },
+    {
+        "name": "Michael",
+        "userId": 27,
+        "email": "tagatesy@cyberchimps.com",
+        "password": "pL7+1$5jyW@,7",
+        "role": "student"
+    },
+    {
+        "name": "David",
+        "userId": 44,
+        "email": "pstrognellz@google.ru",
+        "password": "qK5?T`vn",
+        "role": "instructor"
+    },
+    {
+        "name": "Emily",
+        "userId": 47,
+        "email": "ggremain10@archive.org",
+        "password": "lP1<q\\0gc7pY\\K+I",
+        "role": "instructor"
+    },
+    {
+        "name": "Michael",
+        "userId": 14,
+        "email": "lhuntington11@walmart.com",
+        "password": "mQ9/2C*lTNa6Zh",
+        "role": "student"
+    },
+    {
+        "name": "Daniel",
+        "userId": 2,
+        "email": "rboate12@lulu.com",
+        "password": "mG8?547t>asvoz",
+        "role": "instructor"
+    },
+    {
+        "name": "Emily",
+        "userId": 58,
+        "email": "iharesnape13@vk.com",
+        "password": "hO7/r2<z}Sdj\\X",
+        "role": "student"
+    },
+    {
+        "name": "David",
+        "userId": 43,
+        "email": "pdonisi14@va.gov",
+        "password": "dB1{nTZX9",
+        "role": "admin"
+    },
+    {
+        "name": "Jacob",
+        "userId": 85,
+        "email": "apollicatt15@nymag.com",
+        "password": "bJ3{Z6&!\\%CGMF",
+        "role": "instructor"
+    },
+    {
+        "name": "John",
+        "userId": 68,
+        "email": "goverstall16@imageshack.us",
+        "password": "vA8_#1o4K{OPFO",
+        "role": "admin"
+    },
+    {
+        "name": "Sarah",
+        "userId": 24,
+        "email": "wbispo17@phoca.cz",
+        "password": "tT2#/epW",
+        "role": "admin"
+    },
+    {
+        "name": "Olivia",
+        "userId": 36,
+        "email": "wbatter18@japanpost.jp",
+        "password": "wB5`/Jedg",
+        "role": "student"
+    },
+    {
+        "name": "Jessica",
+        "userId": 34,
+        "email": "esomers19@mtv.com",
+        "password": "gV1|G!O4f3kJ",
+        "role": "student"
+    },
+    {
+        "name": "Daniel",
+        "userId": 6,
+        "email": "mprendeville1a@omniture.com",
+        "password": "uV3,Kbyu9B0Szg6$",
+        "role": "admin"
+    },
+    {
+        "name": "Daniel",
+        "userId": 18,
+        "email": "reyeington1b@4shared.com",
+        "password": "xG0)AQ*3e$l'",
+        "role": "admin"
+    },
+    {
+        "name": "John",
+        "userId": 15,
+        "email": "kpetzold1c@jalbum.net",
+        "password": "rM7=\\Kv~",
+        "role": "student"
+    },
+    {
+        "name": "Michael",
+        "userId": 21,
+        "email": "rnevitt1d@multiply.com",
+        "password": "jD4\\EuMQN",
+        "role": "instructor"
+    }
+]
