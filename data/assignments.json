@@ -1,0 +1,102 @@
+[
+    {
+        "courseId": 28,
+        "assignmentId": 79,
+        "studentId": 92,
+        "title": "Literature Review",
+        "points": 76,
+        "due": "6/1/2022",
+        "timestamp": "8/18/2022",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 26,
+        "assignmentId": 71,
+        "studentId": 91,
+        "title": "Reflective Journal",
+        "points": 87,
+        "due": "1/1/2022",
+        "timestamp": "2/5/2023",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 7,
+        "assignmentId": 74,
+        "studentId": 47,
+        "title": "Literature Review",
+        "points": 28,
+        "due": "10/1/2022",
+        "timestamp": "10/17/2022",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 94,
+        "assignmentId": 26,
+        "studentId": 69,
+        "title": "Reflective Journal",
+        "points": 9,
+        "due": "5/1/2022",
+        "timestamp": "8/16/2022",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 22,
+        "assignmentId": 40,
+        "studentId": 98,
+        "title": "Annotated Bibliography",
+        "points": 69,
+        "due": "4/1/2022",
+        "timestamp": "12/16/2022",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 91,
+        "assignmentId": 9,
+        "studentId": 30,
+        "title": "Research Paper",
+        "points": 90,
+        "due": "7/1/2022",
+        "timestamp": "4/4/2023",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 48,
+        "assignmentId": 50,
+        "studentId": 77,
+        "title": "Oral Presentation",
+        "points": 54,
+        "due": "2/14/2022",
+        "timestamp": "2/12/2023",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 86,
+        "assignmentId": 42,
+        "studentId": 45,
+        "title": "Literature Review",
+        "points": 98,
+        "due": "9/1/2022",
+        "timestamp": "11/11/2022",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 82,
+        "assignmentId": 99,
+        "studentId": 92,
+        "title": "Reflective Journal",
+        "points": 18,
+        "due": "5/1/2022",
+        "timestamp": "6/5/2023",
+        "studentSubmissions": []
+    },
+    {
+        "courseId": 65,
+        "assignmentId": 38,
+        "studentId": 88,
+        "title": "Critical Analysis",
+        "points": 68,
+        "due": "6/1/2022",
+        "timestamp": "3/16/2023",
+        "studentSubmissions": []
+    }
+]

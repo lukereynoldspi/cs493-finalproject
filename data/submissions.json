@@ -1,0 +1,72 @@
+[
+    {
+        "assignmentId": 60,
+        "studentId": 27,
+        "grade": 16.55,
+        "timestamp": "10/5/2022",
+        "file": "homework.docx"
+    },
+    {
+        "assignmentId": 56,
+        "studentId": 45,
+        "grade": 16.33,
+        "timestamp": "7/7/2022",
+        "file": "final.docx"
+    },
+    {
+        "assignmentId": 98,
+        "studentId": 22,
+        "grade": 6.45,
+        "timestamp": "12/14/2022",
+        "file": "deez.docx"
+    },
+    {
+        "assignmentId": 33,
+        "studentId": 39,
+        "grade": 95.18,
+        "timestamp": "11/6/2022",
+        "file": "bruh.docx"
+    },
+    {
+        "assignmentId": 70,
+        "studentId": 90,
+        "grade": 81.06,
+        "timestamp": "9/26/2022",
+        "file": "easports.docx"
+    },
+    {
+        "assignmentId": 59,
+        "studentId": 71,
+        "grade": 87.82,
+        "timestamp": "2/18/2023",
+        "file": "whyamistillhere.docx"
+    },
+    {
+        "assignmentId": 74,
+        "studentId": 45,
+        "grade": 60.68,
+        "timestamp": "4/23/2023",
+        "file": "petergriffin.docx"
+    },
+    {
+        "assignmentId": 14,
+        "studentId": 91,
+        "grade": 20.59,
+        "timestamp": "6/26/2022",
+        "file": "bigchungus.docx"
+    },
+    {
+        "assignmentId": 93,
+        "studentId": 40,
+        "grade": 52.91,
+        "timestamp": "9/2/2022",
+        "file": "waltuh.docx"
+    },
+    {
+        "assignmentId": 45,
+        "studentId": 58,
+        "grade": 65.31,
+        "timestamp": "4/5/2023",
+        "file": "hello.docx"
+    }
+]
