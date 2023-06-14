@@ -21,7 +21,7 @@ router.post('/', limiter, (req, res) => {
   const userData = req.body;
   const newUser = new userSchema(userData);
   newUser.save().then(() => {
-    res.status(201).json({ id: newUser.userid});
+    res.status(201).json({ id: newUser.userId});
   }).catch(err => {
     console.error(err);
     res.status(500).json({
@@ -66,7 +66,7 @@ router.get('/:userId', limiter, jwtMiddleware, async (req, res) => {
       ]);
     }
     const userData = {
-      id: user.userid,
+      id: user.userId,
       name: user.name,
       email: user.email,
       role: user.role,
