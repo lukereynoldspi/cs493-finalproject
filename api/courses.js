@@ -5,8 +5,17 @@ const userSchema = require('../models/user');
 const jwtMiddleware = require('../jwtMiddleware');
 // const csv = require('csv-parser');
 const fs = require('fs');
+const rateLimit = require('express-rate-limit');
+
 exports.router = router;
-router.get('/', jwtMiddleware, async (req, res) => {
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // 10 requests per minute
+  message: 'Too many requests from thi IP, please try again in a minute'
+});
+
+router.get('/', limiter, jwtMiddleware, async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const options = {
     skip: (page - 1) * limit,
@@ -21,7 +30,7 @@ router.get('/', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:courseId', jwtMiddleware, async (req, res) => {
+router.get('/:courseId', limiter, jwtMiddleware, async (req, res) => {
   const courseId = req.params.courseId;
   try {
     const course = await CourseSchema.findById( courseId, 'enrolledStudents -assignments');
@@ -32,7 +41,7 @@ router.get('/:courseId', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.post('/', jwtMiddleware, async (req, res) => {
+router.post('/', jwtMiddleware, limiter, async (req, res) => {
   if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Forbidden' });
   }
@@ -48,7 +57,7 @@ router.post('/', jwtMiddleware, async (req, res) => {
   });
 });
 
-router.patch('/:courseId', jwtMiddleware, async (req, res) => {
+router.patch('/:courseId', limiter, jwtMiddleware, async (req, res) => {
   if (req.user.role !== 'admin' || req.user.role !== 'instructor') {
     return res.status(403).json({ message: 'Forbidden' });
   }
@@ -68,7 +77,7 @@ router.patch('/:courseId', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.delete('/:courseId', jwtMiddleware, async (req, res) => {
+router.delete('/:courseId', limiter, jwtMiddleware, async (req, res) => {
   if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Forbidden' });
   }
@@ -86,7 +95,7 @@ router.delete('/:courseId', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:courseID/students', jwtMiddleware, async (req, res) => {
+router.get('/:courseID/students', limiter, jwtMiddleware, async (req, res) => {
   const courseId = req.params.courseId;
   try {
     const course = await CourseSchema.findById(courseId);
@@ -103,7 +112,7 @@ router.get('/:courseID/students', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.post('/:courseId/students', jwtMiddleware, async (req, res) => {
+router.post('/:courseId/students', limiter, jwtMiddleware, async (req, res) => {
   const courseId = req.params.courseId;
   const studentId = req.body.studentId;
   try {
@@ -123,7 +132,7 @@ router.post('/:courseId/students', jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:courseId/roster', jwtMiddleware, async (req, res) => {
+router.get('/:courseId/roster', limiter, jwtMiddleware, async (req, res) => {
   try {
     const courseID = req.params.courseId;
     const course = await CourseSchema.findById(courseID);
