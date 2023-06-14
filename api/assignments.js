@@ -25,7 +25,7 @@ router.get('/',limiter, jwtMiddleware, async (req, res) => {
 router.get('/:assignmentId', limiter, jwtMiddleware, async (req, res) => {
   const assignmentId = req.params.assignmentId;
   try {
-    const assignment = await AssignmentSchema.findById( req.params.assignmentId );
+    const assignment = await AssignmentSchema.findById( assignmentId );
     res.status(200).json(assignment);
   } catch (err) {
     console.error(err);
