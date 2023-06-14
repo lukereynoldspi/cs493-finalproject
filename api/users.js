@@ -37,12 +37,11 @@ router.post('/login', limiter, async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Invalid email' });
     }
-    const passwordMatch = await userSchema.comparePassword(password, user.password);
-    if (!passwordMatch) {
+    const pwd = await userSchema.findOne({ password });
+    if (!pwd) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-    const token = jwt.sign(user, JWT_SECRET, { expiresIn: JWT_EXPIRATION_TIME });
-    res.status(200).json({ token });
+    res.status(200).json("Logged in");
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error logging in' });
