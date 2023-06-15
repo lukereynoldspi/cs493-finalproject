@@ -33,10 +33,11 @@ router.get('/:assignmentId', limiter, jwtMiddleware, async (req, res) => {
   }
 });
 
-router.post('/', limiter, jwtMiddleware, async (req, res) => {
-  if (req.user.role !== 'admin' || req.user.role !== 'instructor') {
+router.post('/', limiter, jwtMiddleware, (req, res) => {
+  if (req.user.role !== 'admin' && req.user.role !== 'instructor') {
     return res.status(403).json({ message: 'Forbidden' });
   }
+
   const assignmentData = req.body;
   const newAssignment = new AssignmentSchema(assignmentData);
   newAssignment.save().then(() => {
