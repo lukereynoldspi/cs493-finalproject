@@ -43,7 +43,7 @@ router.post('/login', limiter, async (req, res) => {
     if (!pwd) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-    const token = jwt.sign({ email: userSchema.email, role: userSchema.role}, JWT_SECRET, JWT_EXPIRATION_TIME);
+    const token = jwt.sign({ email: user.email, role: user.role}, JWT_SECRET, JWT_EXPIRATION_TIME);
     res.status(200).json({ token: token, message: "Logged in"});
   } catch (err) {
     console.error(err);
@@ -57,13 +57,13 @@ router.get('/:userId', limiter, jwtMiddleware, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    if (req.userSchema.role !== 'admin' && req.userSchema.userid !== user.userId) {
+    if (req.user.role !== 'admin' && req.user.userid !== user.userId) {
       return res.status(403).json({ message: 'Forbidden' });
     }
     let classes = [];
     if (user.role === 'student') {
       classes = await userSchema.aggregate([
-        { $match: { userid: user.userid } },
+        { $match: { userid: user.userId } },
         { $lookup: { from: 'courses', localField: 'userId', foreignField: 'instructor', as: 'teachingClasses'}},
         { $project: { _id: 0, teachingClasses: 1 } }
       ]);
