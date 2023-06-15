@@ -53,14 +53,14 @@ router.post('/login', limiter, async (req, res) => {
 
 router.get('/:userId', limiter, jwtMiddleware, async (req, res) => {
   try {
-    const user = await userSchema.findOne({ userid: req.params.userId });
+    const user = await userSchema.findById(req.params.userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    if (req.user.role !== 'admin' && req.user.userid !== user.userId) {
+    if (req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Forbidden' });
     }
-    let classes = [];
+    
     if (user.role === 'student') {
       classes = await userSchema.aggregate([
         { $match: { userid: user.userId } },
@@ -68,15 +68,8 @@ router.get('/:userId', limiter, jwtMiddleware, async (req, res) => {
         { $project: { _id: 0, teachingClasses: 1 } }
       ]);
     }
-    const userData = {
-      id: user.userId,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      classes
-    };
 
-    res.status(200).json(userData);
+    res.status(200).json(user);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error getting user' });
