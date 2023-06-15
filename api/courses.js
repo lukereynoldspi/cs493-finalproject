@@ -95,7 +95,7 @@ router.delete('/:courseId', limiter, jwtMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:courseID/students', limiter, jwtMiddleware, async (req, res) => {
+router.get('/:courseId/students', limiter, jwtMiddleware, async (req, res) => {
   const courseId = req.params.courseId;
   try {
     const course = await CourseSchema.findById(courseId);
