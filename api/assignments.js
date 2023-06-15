@@ -105,7 +105,7 @@ router.post('/:assignmentId/submissions', limiter, jwtMiddleware, async (req, re
       return res.status(404).json({ message: 'Assignment not found' });
     }
     const submission = new submissionSchema({
-      assignmnetID,
+      assignmentID,
       studentID,
       file,
       timestamp: new Date()
@@ -113,10 +113,10 @@ router.post('/:assignmentId/submissions', limiter, jwtMiddleware, async (req, re
     submission.save().then(() => {
       const submissionURL = `http://localhost:8000/submissions/${submission.id}/download`;
       res.status(201).json({
-        id: savedSubmission.id,
-        studentID: savedSubmission.studentID,
-        assignmentID: savedSubmission.assignmentID,
-        timestamp: savedSubmission.timestamp,
+        id: submission.id,
+        studentID: submission.studentId,
+        assignmentID: submission.assignmentId,
+        timestamp: submission.timestamp,
         file: submissionURL
       });
   }).catch(err => {
