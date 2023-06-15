@@ -22,7 +22,7 @@ router.get('/', limiter, jwtMiddleware, async (req, res) => {
     limit: parseInt(limit)
   };
   try {
-    const courses = await CourseSchema.find({},'enrolledStudents -assignments', options);
+    const courses = await CourseSchema.find()
     res.status(200).json(courses);
   } catch (err) {
     console.error(err);
@@ -33,7 +33,7 @@ router.get('/', limiter, jwtMiddleware, async (req, res) => {
 router.get('/:courseId', limiter, jwtMiddleware, async (req, res) => {
   const courseId = req.params.courseId;
   try {
-    const course = await CourseSchema.findById( courseId, 'enrolledStudents -assignments');
+    const course = await CourseSchema.findById( courseId);
     res.status(200).json(course);
   } catch (err) {
     console.error(err);
@@ -58,7 +58,7 @@ router.post('/', jwtMiddleware, limiter, async (req, res) => {
 });
 
 router.patch('/:courseId', limiter, jwtMiddleware, async (req, res) => {
-  if (req.user.role !== 'admin' || req.user.role !== 'instructor') {
+  if (req.user.role !== 'admin' && req.user.role !== 'instructor') {
     return res.status(403).json({ message: 'Forbidden' });
   }
   const courseId = req.params.courseId;
@@ -88,7 +88,7 @@ router.delete('/:courseId', limiter, jwtMiddleware, async (req, res) => {
       return res.status(404).json({ message: 'Course not found' });
     }
     await course.remove();
-    res.status(204).json();
+    res.status(204).json("Deleted");
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error deleting course' });
