@@ -4,7 +4,7 @@ const generateRandomString = (length) => {
   return crypto.randomBytes(length).toString('hex');
 };
 
-const jwtSecret = generateRandomString(32); 
+const jwtSecret = "secret" 
 
 module.exports = {
     JWT_SECRET: jwtSecret,
